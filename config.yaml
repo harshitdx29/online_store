@@ -1,0 +1,11 @@
+mongo_users:
+    host: 'localhost'
+    port: 27017
+    db: 'heroku_n940r2hr'
+    collection: 'dataCollection'
+    user: 'harshit'
+    password: 'mongo'
+authenticate:
+    username: 'admin'
+    password: 'secret'
+

@@ -1,0 +1,36 @@
+Flask framework is used to create the REST Api for an online store.
+
+MongoDb is used as the database for storing information about the products in the store.
+For demo purposes a product only has two fields identifying it:
+  1) Product Id
+  2) Product Name
+More fields like Product Price, Quantity, Description can be added for actual scenarios.
+
+The API supports 4 opertions:
+1) Adding a new product: It will be a POST request accepting a JSON data for adding to data-base. Before adding it will check if the product already exists.
+
+2) Modifying a Product: It will be a POST request taking a JSON Object containing product_id and product name. It will not change anything if the product name is not modified.
+
+3) Deleting a Product: A POST request taking the product id as input and deleting the required product from the database.
+
+4) Retreiving a Product/ all Products: A GET Request which will fetch the product baseed on the product id passed or all the products as required.
+
+All the above operations are authenticated.
+
+POSTMAN API client can be used to test the API.
+
+Server:
+It has two components:
+  1) Application Data Model
+  2) Resource Model
+
+Client:
+It is the client app consuming the REST API.
+
+Server and Client communicate over HTTP Protocol.
+
+The code is deployed on Heroku which can be accessed using https://api-online-shop.herokuapp.com/
+
+Set up instructions as well as Request-Response Object are mentioned in README.md
+
+
