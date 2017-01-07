@@ -1,7 +1,7 @@
 import sys
 import unittest
 from os import path
-
+import mock
 import flask
 
 sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
@@ -37,7 +37,11 @@ class OnlineStoreTestCase(unittest.TestCase):
   def test_authenticate(self):
     self.assertTrue(type(online_store.authenticate()) is flask.wrappers.Response)
 
-  def test_project_online_store_api(self):
+  def insert_mongo(prod_id, prod_name):
+    return "mocked insert_into_mongo method."
+
+  @mock.patch('modules.src.online_store.insert_into_mongo', side_effect=insert_mongo)
+  def test_project_online_store_api(self, mocked_insert_into_mongo):
     dict = {}
     data1 = {
       'product_id': "Product Id missing"
@@ -51,7 +55,13 @@ class OnlineStoreTestCase(unittest.TestCase):
     self.assertTrue(online_store.project_online_store_api(dict) == data2)
     self.assertFalse(online_store.project_online_store_api(dict) == data1)
 
-  def test_get_prod_dict(self):
+  @mock.patch('modules.src.online_store.insert_into_mongo', side_effect=insert_mongo)
+  def test_insert_into_mongo(self, mocked_insert_into_mongo):
+    self.assertTrue(online_store.insert_into_mongo("1", "test")== "mocked insert_into_mongo method.")
+    self.assertFalse(online_store.insert_into_mongo("1", "test")== "Random String")
+
+  @mock.patch('modules.src.online_store.insert_into_mongo', side_effect=insert_mongo)
+  def test_get_prod_dict(self, mocked_insert_in_mongo):
     prod_id = ""
     prod_name = "Test Product"
     data = {
