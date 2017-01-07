@@ -1,1 +1,1 @@
-web: gunicorn online_store:app
+web: gunicorn modules.src.online_store:app

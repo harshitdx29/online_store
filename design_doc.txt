@@ -24,7 +24,7 @@ It is the client app consuming the REST API.
 
 Server and Client communicate over HTTP Protocol.
 
-The code is deployed on Heroku which can be accessed using https://api-online-shop.herokuapp.com/
+The code is deployed on Heroku which can be accessed using https://online-store-app-wingify.herokuapp.com/
 
 Set up instructions as well as Request-Response Object are mentioned in README.md
 
