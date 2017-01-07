@@ -3,7 +3,7 @@ Setup instructions:
 2) virtualenv venv
 3) source venv/bin/activate
 4) pip install -r requirements.txt
-5) python online_store_api.py
+5) python modules/src/online_store_api.py
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 Request:GET curl -i -H "Content-Type: application/json" -u admin:secret 0.0.0.0:80/ - Welcome Page for the online store
