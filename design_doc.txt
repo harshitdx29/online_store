@@ -19,11 +19,6 @@ All the above operations are authenticated.
 
 POSTMAN API client can be used to test the API.
 
-Server:
-It has two components:
-  1) Application Data Model
-  2) Resource Model
-
 Client:
 It is the client app consuming the REST API.
 

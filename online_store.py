@@ -15,7 +15,6 @@ def check_auth(username, password):
     passwd = config.get('authenticate').get('password')
     return username == uname and password == passwd
 
-
 def authenticate():
   """Sends a 401 response that enables basic auth"""
   return Response(
@@ -45,23 +44,24 @@ def project_online_store_api(prod_dict):
 
 #Returns a dictionary of Product Id and Product Name 
 def get_prod_dict(prod_id,prod_name):
-    if not prod_id:
-        data = {
-            'product_id': "Product Id missing"
-        }    
-    insert_into_mongo(prod_id, prod_name)    
+  if not prod_id:
     data = {
-            'product_id': prod_id,
-            'product_name': prod_name
-        }    
+      'product_id': "Product Id missing"
+    }
     return data
+  insert_into_mongo(prod_id, prod_name)
+  data = {
+    'product_id': prod_id,
+    'product_name': prod_name
+  }
+  return data
 
 def insert_into_mongo(product_id, product_name):
   try:
     collection.insert_one({'product_id':product_id,'product_name':product_name})
     return
   except:
-    logging.error('Error inserting in List')
+    logging.error('Error inserting in Database')
     return
 
 @app.route('/', methods=['GET'])

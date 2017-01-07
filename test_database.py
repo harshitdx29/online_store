@@ -2,6 +2,22 @@ import unittest
 import database
 
 class DatabaseTestCase(unittest.TestCase):
+
+  @classmethod
+  def setup_class(klass):
+    """This method is run once for each class before any tests are run"""
+
+  @classmethod
+  def teardown_class(klass):
+    """This method is run once for each class _after_ all tests are run"""
+
+  def setUp(self):
+    self.tester = app.test_client(self)
+    self.config = utils.get_config()
+
+  def teardown(self):
+    print "TEAR DOWN!"
+
   def test_dbConfig(self):
     self.assertTrue(database.dbConfig == 'heroku_n940r2hr')
     self.assertFalse(database.dbConfig == 'Random_String') 
