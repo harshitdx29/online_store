@@ -3,21 +3,11 @@ import utils
 import json
 from functools import wraps
 from flask import Flask, jsonify, request, Response
-from pymongo import MongoClient
+from database import collection
 
 app = Flask('Online_Store')
-env = utils.get_env()
-config = utils.get_config(env)
 
-#Mongo Connections 
-dbConfig = config.get('mongo_users').get('db')
-collectionConfig = config.get('mongo_users').get('collection')
-user = config.get('mongo_users').get('user')
-password = config.get('mongo_users').get('password')
-client = MongoClient('mongodb://%s:%s@ds011291.mlab.com:11291/heroku_n940r2hr'%(user,password))
-db= client[dbConfig]
-collection = db[collectionConfig]
-
+config = utils.get_config()
 
 #Authentication Region
 def check_auth(username, password):
@@ -27,20 +17,20 @@ def check_auth(username, password):
 
 
 def authenticate():
-    """Sends a 401 response that enables basic auth"""
-    return Response(
-    'Could not verify your access level for that URL.\n'
-    'You have to login with proper credentials', 401,
-    {'WWW-Authenticate': 'Basic realm="Login Required"'})
+  """Sends a 401 response that enables basic auth"""
+  return Response(
+  'Could not verify your access level for that URL.\n'
+  'You have to login with proper credentials', 401,
+  {'WWW-Authenticate': 'Basic realm="Login Required"'})
 
 def requires_auth(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-      auth = request.authorization
-      if not auth or not check_auth(auth.username, auth.password):
-        return authenticate()
-      return f(*args, **kwargs)
-    return decorated
+  @wraps(f)
+  def decorated(*args, **kwargs):
+    auth = request.authorization
+    if not auth or not check_auth(auth.username, auth.password):
+      return authenticate()
+    return f(*args, **kwargs)
+  return decorated
 
 @app.route("/health", methods=['GET'])
 @requires_auth
