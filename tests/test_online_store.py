@@ -1,10 +1,13 @@
+import sys
 import unittest
-import online_store
+from os import path
+
 import flask
-import utils
-from flask import request
-from online_store import app
-from functools import wraps
+
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+from modules import utils
+from modules.src import online_store
+from modules.src.online_store import app
 
 class OnlineStoreTestCase(unittest.TestCase):
 
@@ -68,4 +71,4 @@ class OnlineStoreTestCase(unittest.TestCase):
       self.assertTrue(response.status_code == 401)
 
 if __name__ == '__main__':
-    unittest.main()
+  unittest.main()

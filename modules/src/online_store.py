@@ -1,9 +1,14 @@
 #!/usr/bin/env python
-import utils
 import json
+import sys
 from functools import wraps
+from os import path
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
 from flask import Flask, jsonify, request, Response
+
+import utils
 from database import collection
+
 
 app = Flask('Online_Store')
 

@@ -1,5 +1,6 @@
-import utils
 from pymongo import MongoClient
+
+import utils
 
 config = utils.get_config()
 

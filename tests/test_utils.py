@@ -1,5 +1,10 @@
+import sys
 import unittest
-import utils
+from os import path
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+from modules import utils
+from modules.src.online_store import app
+
 
 class UtilsTestCase(unittest.TestCase):
   @classmethod
@@ -22,4 +27,4 @@ class UtilsTestCase(unittest.TestCase):
     self.assertFalse(utils.get_config() == None)
 
 if __name__ == '__main__':
-    unittest.main()
+  unittest.main()

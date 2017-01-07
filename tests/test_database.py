@@ -1,5 +1,11 @@
+import sys
+from os import path
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
 import unittest
-import database
+
+from modules import database
+from modules.src.online_store import app
+from modules import utils
 
 class DatabaseTestCase(unittest.TestCase):
 
@@ -20,10 +26,10 @@ class DatabaseTestCase(unittest.TestCase):
 
   def test_dbConfig(self):
     self.assertTrue(database.dbConfig == 'heroku_n940r2hr')
-    self.assertFalse(database.dbConfig == 'Random_String') 
+    self.assertFalse(database.dbConfig == 'Random_String')
 
   def test_collectionConfig(self):
-    self.assertTrue(database.collectionConfig =='dataCollection')
+    self.assertTrue(database.collectionConfig == 'dataCollection')
     self.assertFalse(database.collectionConfig == 'Random_String')
 
   def test_user(self):
